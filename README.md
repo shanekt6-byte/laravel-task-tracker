@@ -1,58 +1,81 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Laravel Blade Task Tracker
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A lightweight, clean Task Tracker web application built with **Laravel 13**, **Blade**, and **SQLite**.
 
-## About Laravel
+Built as part of a technical practical assessment demonstrating core Laravel concepts:
+- Database Migrations & Schema Design
+- Eloquent ORM & Mass Assignment Protection
+- RESTful Web Routes & Route Model Binding
+- Server-side Form Validation & Session Flash Messages
+- Laravel Blade Templates with CSRF Security & HTTP Method Spoofing
+- Automated Feature Testing (PHPUnit)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Features
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+1. **Create New Task**:
+   - Required Title with max-length validation.
+   - Optional Description.
+   - Default status set automatically to `pending`.
+2. **View All Tasks**:
+   - Clean, responsive task list displaying task ID, title, description, status badge, and timestamps.
+3. **Toggle Task Status**:
+   - One-click bidirectional status toggle between `pending` (amber badge) and `completed` (green badge).
+   - Validated strictly against permitted values (`in:pending,completed`).
+4. **Delete Task**:
+   - RESTful deletion with confirmation dialog and flash notification.
+5. **CSRF & Security**:
+   - All forms protected with `@csrf`.
+   - Method spoofing using `@method('PATCH')` and `@method('DELETE')`.
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Technical Stack
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- **Framework**: Laravel 13.x
+- **PHP**: 8.5+
+- **Database**: SQLite (serverless, file-based)
+- **Frontend**: Laravel Blade templates with clean modern styling
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+---
 
-## Agentic Development
+## Setup & Running Locally
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/<your-username>/laravel-task-tracker.git
+   cd laravel-task-tracker
+   ```
 
+2. **Install PHP dependencies**:
+   ```bash
+   composer install
+   ```
+
+3. **Configure Environment**:
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
+
+4. **Run Migrations**:
+   ```bash
+   php artisan migrate
+   ```
+
+5. **Start Development Server**:
+   ```bash
+   php artisan serve
+   ```
+   Visit: `http://127.0.0.1:8000`
+
+---
+
+## Running Automated Tests
+
+Run the full test suite (8 tests covering validation, state transitions, creation, and deletion):
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+php artisan test
 ```
-
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+All tests should pass with 100% green assertions.
